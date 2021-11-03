@@ -49,4 +49,12 @@ public class mainTest {
         assertEquals(0, ControllOfSpecificValue[y][x]);
     }
 
+    @Test
+    public void testOutPutIsCorect() {
+
+        //  check testGeneral that its equal to newGeneration(array)
+        assertArrayEquals(testGeneral, main.newGeneration(inputValus, y, x));
+
+    }
+
 }
