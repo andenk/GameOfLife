@@ -72,5 +72,20 @@ public class mainTest {
 
         assertEquals(0, ControllOfSpecificValue[6][1]);
     }
+    @Test
+    public void testOverCroudedCellDies() {
+        // Overcruding same cell most die
 
+        //check that 5,5 and 6,5 is alive before newGeneration start
+        assertEquals(1, inputValus[5][5]);
+        assertEquals(1, inputValus[6][5]);
+
+        ControllOfSpecificValue = main.newGeneration(inputValus, y, x);
+
+
+        // 5,5 and 6,5 is dead
+        assertEquals(0, ControllOfSpecificValue[5][5]);
+        assertEquals(0, ControllOfSpecificValue[6][5]);
+
+    }
 }
