@@ -5,4 +5,11 @@ public class main {
 
 
     }
+
+    public int[][] newGeneration(int[][] inputValus, int Y, int X) {
+        int[][] newG = new int[Y][X];
+
+        return newG;
+
+    }
 }
