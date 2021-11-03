@@ -56,5 +56,21 @@ public class mainTest {
         assertArrayEquals(testGeneral, main.newGeneration(inputValus, y, x));
 
     }
+    @Test
+    public void testAlounCellDies() {
+        // add life to a alune cell
+        //check 6,1 change state to zero
+        assertEquals(0, inputValus[6][1]);
+
+        inputValus[6][1] = 1;
+
+        assertEquals(1, inputValus[6][1]);
+
+        ControllOfSpecificValue = main.newGeneration(inputValus, y, x);
+
+        assertArrayEquals(testGeneral, ControllOfSpecificValue);
+
+        assertEquals(0, ControllOfSpecificValue[6][1]);
+    }
 
 }
