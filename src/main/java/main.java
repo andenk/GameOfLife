@@ -65,5 +65,15 @@ public class main {
 
     }
 
+    public static void checkLifeStatusOfCells(int[][] grid, int[][] newG, int i, int j, int aliveNeighbours) {
+
+
+
+    }
+
+    private static void changeStateOfCell(int[][] newG, int i, int j, int aliveOrNot) {
+
+    }
+
 
 }
