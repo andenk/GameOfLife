@@ -75,6 +75,18 @@ public class mainTest {
     @Test
     public void testOverCroudedCellDies() {
         // Overcruding same cell most die
+        // check for 5,5 is 6,5 dead
+        inputValus[5][4] = 1;
+        inputValus[5][5] = 1;
+        inputValus[5][6] = 1;
+        inputValus[6][4] = 1;
+        inputValus[6][5] = 1;
+
+        testGeneral[4][5] = 1;
+        testGeneral[5][4] = 1;
+        testGeneral[5][6] = 1;
+        testGeneral[6][4] = 1;
+        testGeneral[6][6] = 1;
 
         //check that 5,5 and 6,5 is alive before newGeneration start
         assertEquals(1, inputValus[5][5]);
@@ -86,6 +98,19 @@ public class mainTest {
         // 5,5 and 6,5 is dead
         assertEquals(0, ControllOfSpecificValue[5][5]);
         assertEquals(0, ControllOfSpecificValue[6][5]);
+
+    }
+
+    @Test
+    public void testCellLiveswhen3Neibours() {
+        // if cell is dead and have 3 alive neighbours
+        // check for 1,3 wakes upp all becuase 3 neighbuars on the around is a live
+
+        assertEquals(0, inputValus[1][3]);
+
+        ControllOfSpecificValue = main.newGeneration(inputValus, y, x);
+
+        assertEquals(1, ControllOfSpecificValue[1][3]);
 
     }
 }
