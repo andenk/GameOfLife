@@ -22,12 +22,12 @@ public class main {
 
     private static void GenerationOne(int y, int x, int[][] grid) {
         System.out.println("Generation 1");
-        loopGridAndPrint(grid,y, x);
+        loopGridAndPrint(grid, y, x);
         System.out.println();
         newGeneration(grid, y, x);
     }
 
-    private static void loopGridAndPrint(int[][] grid,int y, int x) {
+    private static void loopGridAndPrint(int[][] grid, int y, int x) {
 
         for (int i = 0; i < y; i++) {
             for (int j = 0; j < x; j++) {
@@ -47,22 +47,36 @@ public class main {
             for (int j = 1; j < X - 1; j++) {
 
                 int aliveNeighbours = 0;
-                aliveNeighbours += grid[i][j];
 
+                // hämta hur många grannar som lever grannarna
+                aliveNeighbours = getAliveNeighbours(grid, i, j, aliveNeighbours);
 
-                aliveNeighbours -= grid[i][j];
-                // Any live cell with fewer than two live neighbors dies, as if caused by underpopulation
                 checkLifeStatusOfCells(grid, newG, i, j, aliveNeighbours);
+
             }
         }
 
 
         System.out.println("Generation 2");
-        loopGridAndPrint(newG,Y, X);
+        loopGridAndPrint(newG, Y, X);
 
 
         return newG;
 
+    }
+
+    private static int getAliveNeighbours(int[][] grid, int i, int j, int aliveNeighbours) {
+
+        aliveNeighbours -= grid[i][j]; // Ta bort orginal cellen från grannar
+
+        for (int l = -1; l <= 1; l++) {
+            for (int k = -1; k <= 1; k++) {
+                aliveNeighbours += grid[i + l][j + k];
+
+            }
+        }
+
+        return aliveNeighbours;
     }
 
     public static void checkLifeStatusOfCells(int[][] grid, int[][] newG, int i, int j, int aliveNeighbours) {
@@ -78,6 +92,7 @@ public class main {
             //om cell är död och har tre grannar vakna
         else if ((grid[i][j] == 0) && (aliveNeighbours == 3))
             changeStateOfCell(newG, i, j, 1);
+
             //låt den vara
         else
             changeStateOfCell(newG, i, j, grid[i][j]);
