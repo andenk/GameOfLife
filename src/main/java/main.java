@@ -28,6 +28,17 @@ public class main {
     }
 
     private static void loopGridAndPrint(int[][] grid,int y, int x) {
+
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < x; j++) {
+                if (grid[i][j] == 0) {
+                    System.out.print(".");
+                } else
+                    System.out.print("*");
+            }
+            System.out.println();
+
+        }
     }
 
     static int[][] newGeneration(int[][] grid, int Y, int X) {
@@ -45,6 +56,9 @@ public class main {
             }
         }
 
+
+        System.out.println("Generation 2");
+        loopGridAndPrint(newG,Y, X);
 
 
         return newG;
