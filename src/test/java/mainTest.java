@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class mainTest {
@@ -11,7 +13,7 @@ public class mainTest {
     int[][] ControllOfSpecificValue;
 
     int[][] inputValus = {{1, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0},
+            {0, 0, 0, 1, 1, 0, 0, 0},
             {0, 0, 0, 1, 1, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
             {0, 0, 0, 0, 0, 0, 0, 0},
@@ -30,7 +32,11 @@ public class mainTest {
             {0, 0, 0, 0, 0, 0, 0, 0}
 
     };
+    @Test
+    public void CheckIfGenOneIsAllDeadGEnTwoShoudeBeZero(){
+        ControllOfSpecificValue = main.newGeneration(inputValus, y, x);
 
+    }
     @Test
     public void LifeNotExistAroundEdges() {
         // all edges ar dead
@@ -111,6 +117,14 @@ public class mainTest {
         ControllOfSpecificValue = main.newGeneration(inputValus, y, x);
 
         assertEquals(1, ControllOfSpecificValue[1][3]);
+
+    }
+
+
+    //kom på hur jag skulle testa mot slutet
+    @Test
+    public void testCountAliveNeghbour(){
+        assertEquals(2,main.getAliveNeighbours(inputValus, 2, 5,0));
 
     }
 }

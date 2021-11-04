@@ -65,7 +65,7 @@ public class main {
 
     }
 
-    private static int getAliveNeighbours(int[][] grid, int i, int j, int aliveNeighbours) {
+    public static int getAliveNeighbours(int[][] grid, int i, int j, int aliveNeighbours) {
 
         aliveNeighbours -= grid[i][j]; // Ta bort orginal cellen från grannar
 
