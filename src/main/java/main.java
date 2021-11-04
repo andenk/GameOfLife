@@ -52,7 +52,7 @@ public class main {
 
                 aliveNeighbours -= grid[i][j];
                 // Any live cell with fewer than two live neighbors dies, as if caused by underpopulation
-
+                checkLifeStatusOfCells(grid, newG, i, j, aliveNeighbours);
             }
         }
 
@@ -66,13 +66,27 @@ public class main {
     }
 
     public static void checkLifeStatusOfCells(int[][] grid, int[][] newG, int i, int j, int aliveNeighbours) {
+        //  har en cell färe en 2 grannar dö
+        if ((grid[i][j] == 1) && (aliveNeighbours < 2)) {
+            changeStateOfCell(newG, i, j, 0);
+        }
 
+        // celler med fler än 3 neighbors dör för mycket folk
+        else if ((grid[i][j] == 1) && (aliveNeighbours > 3))
+            changeStateOfCell(newG, i, j, 0);
+
+            //om cell är död och har tre grannar vakna
+        else if ((grid[i][j] == 0) && (aliveNeighbours == 3))
+            changeStateOfCell(newG, i, j, 1);
+            //låt den vara
+        else
+            changeStateOfCell(newG, i, j, grid[i][j]);
 
 
     }
 
     private static void changeStateOfCell(int[][] newG, int i, int j, int aliveOrNot) {
-
+        newG[i][j] = aliveOrNot;
     }
 
 
