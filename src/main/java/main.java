@@ -48,7 +48,6 @@ public class main {
 
                 int aliveNeighbours = 0;
 
-                // hämta hur många grannar som lever grannarna
                 aliveNeighbours = getAliveNeighbours(grid, i, j, aliveNeighbours);
 
                 checkLifeStatusOfCells(grid, newG, i, j, aliveNeighbours);
@@ -67,7 +66,7 @@ public class main {
 
     public static int getAliveNeighbours(int[][] grid, int i, int j, int aliveNeighbours) {
 
-        aliveNeighbours -= grid[i][j]; // Ta bort orginal cellen från grannar
+        aliveNeighbours -= grid[i][j];
 
         for (int l = -1; l <= 1; l++) {
             for (int k = -1; k <= 1; k++) {
@@ -80,20 +79,19 @@ public class main {
     }
 
     public static void checkLifeStatusOfCells(int[][] grid, int[][] newG, int i, int j, int aliveNeighbours) {
-        //  har en cell färe en 2 grannar dö
+
         if ((grid[i][j] == 1) && (aliveNeighbours < 2)) {
             changeStateOfCell(newG, i, j, 0);
         }
 
-        // celler med fler än 3 neighbors dör för mycket folk
+
         else if ((grid[i][j] == 1) && (aliveNeighbours > 3))
             changeStateOfCell(newG, i, j, 0);
 
-            //om cell är död och har tre grannar vakna
+
         else if ((grid[i][j] == 0) && (aliveNeighbours == 3))
             changeStateOfCell(newG, i, j, 1);
 
-            //låt den vara
         else
             changeStateOfCell(newG, i, j, grid[i][j]);
 
