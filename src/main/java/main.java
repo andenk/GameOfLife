@@ -23,9 +23,9 @@ public class main {
 
     private static void loopGridAndPrint(int[][] grid) {
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] == 0) {
+        for (int[] row : grid) {
+            for (int cell : row) {
+                if (cell == 0) {
                     System.out.print(".");
                 } else
                     System.out.print("*");
