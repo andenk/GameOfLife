@@ -2,75 +2,72 @@ public class main {
 
     public static void main(String[] args) {
 
-        int Y = 8, X = 8;
-
-        int[][] grid = {{0, 0, 0, 0, 0, 0, 0, 0},
+     int[][] gridFirstGen = {{0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 1, 0, 0, 0},
                 {0, 0, 0, 1, 1, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 1, 1, 1, 0, 0},
-                {0, 0, 0, 0, 1, 1, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0}
         };
 
 
-        GenerationOne(Y, X, grid);
+        GenerationOne(gridFirstGen);
 
 
     }
 
-    private static void GenerationOne(int y, int x, int[][] grid) {
+    private static void GenerationOne(int[][] gridFirstGen) {
         System.out.println("Generation 1");
-        loopGridAndPrint(grid, y, x);
+        loopGridAndPrint(gridFirstGen);
         System.out.println();
-        newGeneration(grid, y, x);
+        CreateNewGeneration(gridFirstGen);
     }
 
-    private static void loopGridAndPrint(int[][] grid, int y, int x) {
+    private static void loopGridAndPrint(int[][] grid) {
 
-        for (int i = 0; i < y; i++) {
-            for (int j = 0; j < x; j++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == 0) {
                     System.out.print(".");
                 } else
                     System.out.print("*");
             }
+
             System.out.println();
 
         }
     }
 
-    static int[][] newGeneration(int[][] grid, int Y, int X) {
-        int[][] newG = new int[Y][X];
-        for (int i = 1; i < Y - 1; i++) {
-            for (int j = 1; j < X - 1; j++) {
+    static int[][] CreateNewGeneration(int[][] gridFirstGen) {
+
+        int[][] gridNewGen = new int[gridFirstGen.length][gridFirstGen[0].length];
+
+        for (int cordinateY = 1; cordinateY < gridFirstGen.length - 1; cordinateY++) {
+            for (int cordinateX = 1; cordinateX < gridFirstGen[cordinateY].length - 1; cordinateX++) {
 
                 int aliveNeighbours = 0;
 
-                aliveNeighbours = getAliveNeighbours(grid, i, j, aliveNeighbours);
+                aliveNeighbours = getAliveNeighbours(gridFirstGen, cordinateY, cordinateX, aliveNeighbours);
 
-                checkLifeStatusOfCells(grid, newG, i, j, aliveNeighbours);
+                checkLifeStatusOfCells(gridFirstGen, gridNewGen, cordinateY, cordinateX, aliveNeighbours);
 
             }
         }
 
 
         System.out.println("Generation 2");
-        loopGridAndPrint(newG, Y, X);
+        loopGridAndPrint(gridNewGen);
 
 
-        return newG;
+        return gridNewGen;
 
     }
 
-    public static int getAliveNeighbours(int[][] grid, int i, int j, int aliveNeighbours) {
+    public static int getAliveNeighbours(int[][] grid, int cordinateY, int cordinateX, int aliveNeighbours) {
 
-        aliveNeighbours -= grid[i][j];
+        aliveNeighbours -= grid[cordinateY][cordinateX];
 
         for (int l = -1; l <= 1; l++) {
             for (int k = -1; k <= 1; k++) {
-                aliveNeighbours += grid[i + l][j + k];
+                aliveNeighbours += grid[cordinateY + l][cordinateX + k];
 
             }
         }
@@ -78,28 +75,26 @@ public class main {
         return aliveNeighbours;
     }
 
-    public static void checkLifeStatusOfCells(int[][] grid, int[][] newG, int i, int j, int aliveNeighbours) {
+    public static void checkLifeStatusOfCells(int[][] grid, int[][] newG, int cordinateY, int cordinateX, int aliveNeighbours) {
 
-        if ((grid[i][j] == 1) && (aliveNeighbours < 2)) {
-            changeStateOfCell(newG, i, j, 0);
+        if ((grid[cordinateY][cordinateX] == 1) && (aliveNeighbours < 2)) {
+            changeStateOfCell(newG, cordinateY, cordinateX, 0);
         }
 
+        else if ((grid[cordinateY][cordinateX] == 1) && (aliveNeighbours > 3))
+            changeStateOfCell(newG, cordinateY, cordinateX, 0);
 
-        else if ((grid[i][j] == 1) && (aliveNeighbours > 3))
-            changeStateOfCell(newG, i, j, 0);
-
-
-        else if ((grid[i][j] == 0) && (aliveNeighbours == 3))
-            changeStateOfCell(newG, i, j, 1);
-
+        else if ((grid[cordinateY][cordinateX] == 0) && (aliveNeighbours == 3  ))
+            changeStateOfCell(newG, cordinateY, cordinateX, 1);
         else
-            changeStateOfCell(newG, i, j, grid[i][j]);
+            changeStateOfCell(newG, cordinateY, cordinateX, grid[cordinateY][cordinateX]);
 
 
     }
 
-    private static void changeStateOfCell(int[][] newG, int i, int j, int aliveOrNot) {
-        newG[i][j] = aliveOrNot;
+    private static void changeStateOfCell(int[][] newG, int cordinateY, int cordinateX, int aliveOrNot) {
+
+        newG[cordinateY][cordinateX] = aliveOrNot;
     }
 
 
